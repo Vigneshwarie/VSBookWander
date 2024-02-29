@@ -3,11 +3,18 @@ const path = require('path');
 const db = require('./config/connection');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
+//Added typeDefs and resolvers
+const { typeDefs, resolvers } = require('./schemas'); 
+//Added authMiddleware
+const { authMiddleware } = require('./utils/auth');
 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const server = new ApolloServer();
+const server = new ApolloServer({
+     typeDefs,
+     resolvers,
+});
 
 const startApolloServer = async () => {
      await server.start();
@@ -15,7 +22,9 @@ const startApolloServer = async () => {
      app.use(express.urlencoded({ extended: true }));
      app.use(express.json());
 
-     app.use('/grapql', expressMiddleware(server));
+     app.use('/grapql', expressMiddleware(server, {
+          context: authMiddleware,
+     }));
 
      // if we're in production, serve client/build as static assets
      if (process.env.NODE_ENV === 'production') {
