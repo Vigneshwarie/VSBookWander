@@ -30,7 +30,9 @@ const SignupForm = () => {
           }
 
           try {
-               const { user } = await createUser({ variables: { ...userFormData }, });
+               console.log(123456);
+               console.log(userFormData.username);
+               const { user } = await createUser({ variables: {username: userFormData.username, email:userFormData.email, password:userFormData.password }, });
 
                console.log(user);
                Auth.login(user.createUser.token);
