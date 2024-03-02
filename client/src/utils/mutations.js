@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-
+// We dont want return email on both login, and createUser
 export const LOGIN_USER = gql`
      mutation login($email: String!, $password: String!) {
           login(email: $email, password: $password) {
@@ -7,7 +7,6 @@ export const LOGIN_USER = gql`
                user {
                     _id
                     username
-                    email
                }
           }
      }`;
@@ -19,7 +18,6 @@ export const ADD_USER = gql`
                user {
                     _id
                     username
-                    email
                }
           }
      }
