@@ -30,14 +30,11 @@ const LoginForm = () => {
           }
 
           try {
-               const response = await login({ variables: { ...userFormData }, });
-
-               if (!response.ok) {
-                    throw new Error('something went wrong!');
-               }
+               //Changing as per signupform suggested by AskBCS
+               const { data } = await login({ variables: { ...userFormData }, });
                
-               console.log(response);
-               Auth.login(response.login.token);
+               console.log(data);
+               Auth.login(data.login.token);
           } catch (err) {
                console.error(err);
                setShowAlert(true);
@@ -59,7 +56,7 @@ const LoginForm = () => {
                     <Form.Group className='mb-3'>
                          <Form.Label htmlFor='email'>Email</Form.Label>
                          <Form.Control
-                              type='text'
+                              type='email'
                               placeholder='Your email'
                               name='email'
                               onChange={handleInputChange}

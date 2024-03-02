@@ -30,12 +30,11 @@ const SignupForm = () => {
           }
 
           try {
-               console.log(123456);
-               console.log(userFormData.username);
-               const { user } = await createUser({ variables: {username: userFormData.username, email:userFormData.email, password:userFormData.password }, });
+               // AskBCS told me to mentioned as data instead of user.
+               const { data } = await createUser({ variables: {username: userFormData.username, email:userFormData.email, password:userFormData.password }, });
 
-               console.log(user);
-               Auth.login(user.createUser.token);
+               console.log(data);
+               Auth.login(data.createUser.token);
           } catch (err) {
                console.log(err);
                setShowAlert(true);
