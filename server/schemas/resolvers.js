@@ -3,15 +3,11 @@ const { AuthenticationError, signToken } = require('../utils/auth');
 
 const resolvers = {
      Query: {
-          user: async () => {
-               return User.find().populate('savedBooks');
-          },
-          book: async () => {
-               return Book.find({});
-          },
-          getSingleUser: async (parent, { _id, username }) => {
-               const params = _id ? { _id } : { username };
-               return User.findOne(params).populate('savedBooks');
+          me: async (parent, args, context) => {
+               if (context.user) {
+                    return User.findById(context.user._id);
+               }
+               throw AuthenticationError;
           },
      },
      Mutation: {
@@ -20,13 +16,13 @@ const resolvers = {
                const user = await User.findOne({ email });
 
                if (!user) {
-                    throw new AuthenticationError('No user exists with this email address');
+                    throw AuthenticationError;
                }
 
                const correctPw = await user.isCorrectPassword(password);
 
                if (!correctPw) {
-                    throw new AuthenticationError('Incorrect credentials');
+                    throw AuthenticationError;
                }
 
                const token = signToken(user);

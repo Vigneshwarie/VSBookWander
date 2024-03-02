@@ -4,7 +4,7 @@ const db = require('./config/connection');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 //Added typeDefs and resolvers
-const { typeDefs, resolvers } = require('./schemas'); 
+const { typeDefs, resolvers } = require('./schemas');
 //Added authMiddleware
 const { authMiddleware } = require('./utils/auth');
 
@@ -19,7 +19,7 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
      await server.start();
 
-     app.use(express.urlencoded({ extended: true }));
+     app.use(express.urlencoded({ extended: false }));
      app.use(express.json());
 
      app.use('/grapql', expressMiddleware(server, {
