@@ -24,7 +24,6 @@ const typeDefs = `
   
      type Query {
           me: User
-          
      }
 
      type Mutation {
