@@ -3,7 +3,7 @@ const typeDefs = `
      type Book {
           bookId: ID!
           authors: [String]
-          description: String!
+          description: String
           title: String!
           image: String
           link: String
@@ -12,8 +12,7 @@ const typeDefs = `
      type User {
           _id: ID!
           username: String!
-          email: String!
-          password: String!
+          email: String
           bookCount: Int
           savedBooks: [Book]
      }
