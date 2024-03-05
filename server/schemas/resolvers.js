@@ -1,6 +1,8 @@
 const { User, Book } = require('../models');
 const { AuthenticationError, signToken } = require('../utils/auth');
 
+// My tutor helped me understand the resolvers usage in details and fixed query block
+
 const resolvers = {
      Query: {
           me: async (parent, args, context) => {

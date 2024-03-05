@@ -1,4 +1,5 @@
 // Created this type definition based on the models and user-controller files
+// Made a typo error on the filename. My tutor helped me identify the typo. 
 const typeDefs = `
      type Book {
           bookId: ID!
